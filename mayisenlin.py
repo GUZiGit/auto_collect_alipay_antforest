@@ -34,8 +34,13 @@ def collect_energy(is_home=False):
     else:
         if exists(Template(r"data/mayisenlin/tpl1557373442966.png", record_pos=(-0.062, -0.566), resolution=(1080, 1920))):
             return
-        energy_list = find_all(Template(r"data/mayisenlin/tpl1557370999417.png", record_pos=(0.034, -0.215), resolution=(1080, 1920)))
-
+        energy_list1 = find_all(Template(r"data/mayisenlin/tpl1557374412969.png", record_pos=(0.32, -0.203), resolution=(1080, 1920)))
+        energy_list2 = find_all(Template(r"data/mayisenlin/tpl1557395450068.png", record_pos=(0.071, -0.363), resolution=(1080, 1920)))
+        energy_list = []
+        if energy_list1:
+            energy_list = energy_list1
+        if energy_list2:
+            energy_list = list(set(energy_list + energy_list2))
     if not energy_list:
         return
     for energy in energy_list:
