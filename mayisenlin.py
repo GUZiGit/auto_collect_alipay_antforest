@@ -27,10 +27,10 @@ def collect_energy(is_home=False):
     """
     if is_home:
 
-        if not exists(Template(r"data/mayisenlin/tpl1557374412969.png", record_pos=(0.32, -0.203), resolution=(1080, 1920))):
+        if not exists(Template(r"data/mayisenlin/tpl1557374412969.png", record_pos=(0.32, -0.203), resolution=(1080, 1920), threshold=0.9)):
             return
 
-        energy_list = find_all(Template(r"data/mayisenlin/tpl1557374412969.png", record_pos=(0.32, -0.203), resolution=(1080, 1920)))
+        energy_list = find_all(Template(r"data/mayisenlin/tpl1557374412969.png", record_pos=(0.32, -0.203), resolution=(1080, 1920), threshold=0.9))
     else:
         if exists(Template(r"data/mayisenlin/tpl1557373442966.png", record_pos=(-0.062, -0.566), resolution=(1080, 1920))):
             return
@@ -40,7 +40,7 @@ def collect_energy(is_home=False):
         if energy_list1:
             energy_list = energy_list1
         if energy_list2:
-            energy_list = list(set(energy_list + energy_list2))
+            energy_list = energy_list + energy_list2
     if not energy_list:
         return
     for energy in energy_list:
@@ -89,22 +89,22 @@ def swipe_next(check_more=True):
     find_friends_energy()
     if check_more:
         result = exists(
-            Template(r"data/mayisenlin/tpl1557374693373.png", threshold=0.86, record_pos=(0.062, -0.115), resolution=(1080, 1920)))
+            Template(r"data/mayisenlin/tpl1557374693373.png", threshold=0.9, record_pos=(0.062, -0.115), resolution=(1080, 1920)))
         if result:
             check_more = False
             touch(result)
-    if exists(Template(r"data/mayisenlin/tpl1557371700856.png", threshold=0.85, record_pos=(0.012, 0.819), resolution=(1080, 1920))):
+    if exists(Template(r"data/mayisenlin/tpl1557371700856.png", threshold=0.9, record_pos=(0.012, 0.819), resolution=(1080, 1920))):
         return
     look_more_result = exists(
-        Template(r"data/mayisenlin/tpl1557379057683.png", threshold=0.85, record_pos=(0.005, 0.845), resolution=(1080, 1920)))
+        Template(r"data/mayisenlin/tpl1557379057683.png", threshold=0.9, record_pos=(0.005, 0.845), resolution=(1080, 1920)))
     if look_more_result:
         touch(look_more_result)
-    swipe((100, 500), vector=[0, -0.99])
+    swipe((100, 500), vector=[0, -0.7])
     return swipe_next(check_more=check_more)
 
 
 def main():
-    dev = connect_device('Android://127.0.0.1:5037/XXX')  # 填写自己的设备号
+    dev = connect_device('Android://127.0.0.1:5037/')  # 填写自己的设备号
     if dev.is_locked():
         unlock_device(dev)
     start_alipy_forest(dev)
